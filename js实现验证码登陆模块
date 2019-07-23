@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>JS实现生成随机验证码并验证功能</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        div {
+            margin-top: 20px;
+            margin-left: 300px;
+            height: 30px
+        }
+        
+        .code {
+            display: inline-block;
+            vertical-align: middle;
+            width: 60px;
+            height: 30px;
+            background-color: #aaa;
+            text-decoration: none;
+            color: white;
+            line-height: 30px;
+            letter-spacing: 4px;
+            padding-left: 4px;
+        }
+        
+        .text {
+            border: 1 px solid red;
+            height: 26px;
+            outline: none;
+        }
+        
+        .submit {
+            height: 30px;
+            width: 60px;
+            border-radius: 5px;
+            background-color: #499990;
+            border: none;
+            outline: none;
+        }
+    </style>
+</head>
+
+
+<body onload="creatcode()">
+    <div>
+        <input type="text" class="text" placeholder="请输入验证码">
+        <a href="javascript:" class="code" onclick="creatcode(this)"></a>
+        <input type="submit" value="提交" class="submit" onclick="validate()">
+    </div>
+
+
+    <script>
+        var checkcode = document.getElementsByClassName('code')[0];
+        var submit = document.getElementsByClassName('submit')[0];
+        var code = "";
+
+        function creatcode() {
+            var random = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+            code = "";
+            var codelength = 4;
+            for (var i = 0; i < codelength; i++) {
+                var index = Math.floor((Math.random() * 36));
+                code += random[index];
+
+            }
+
+            checkcode.innerHTML = code;
+
+        }
+
+        function validate() {
+            var text = document.getElementsByClassName('text')[0];
+
+            if (text.value == '') { //text.value的数据类型属于字符串
+                alert('验证码为空');
+            } else if (text.value.toUpperCase() != code) {
+                alert('验证码错误');
+            } else {
+                alert("验证码正确")
+
+            }
+
+        }
+    </script>
+</body>
+
+</html>
